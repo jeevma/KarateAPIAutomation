@@ -7,6 +7,12 @@ public class TestGetRunner {
 
     @Test
     public Karate runTest(){
-        return Karate.run("getRequest").relativeTo(getClass());
+        return Karate.run("getRequest", "getRequestWithPath").relativeTo(getClass());
     }
+
+   // @Test
+   // public Karate runTestUsingClassPath(){
+        //return Karate.run("classpath:com/api/automation/getrequest/getRequest.feature");
+   // }
+
 }

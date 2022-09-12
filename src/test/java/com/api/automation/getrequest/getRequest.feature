@@ -5,4 +5,3 @@ Feature: To test the get end point of the application
     Given url 'http://localhost:9897/normal/webapi/all'
     When method get
     Then status 200
-
