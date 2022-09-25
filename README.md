@@ -56,3 +56,37 @@ Feature: To test the get end point of the application
 ### Response Variable:
 When we sent a request using Karate framework, response is captured in the response variable that can be 
 used to perform additional assertions 
+
+
+### Match keyword
+* Used to validate the json response - in 3 ways (using dot notation)
+    * validate complete response
+    * Use with negate condition
+    * validate a specific property in response
+ ```
+Feature: To validate the GET end point
+  To validate the GET end point response
+
+  Background: Setup the base url
+    Given url 'http://localhost:9897'
+
+  Scenario: To get the data in JSOn format
+    Given path '/normal/webapi/all'
+    And header Accept = 'application/json'
+    When method get
+    Then status 200
+    And match response.[0].jobId == 1
+    And match response.[0].experience[1] == 'Apple'
+    And match response.[0].project[0].projectName == 'Movie App'
+    And match response.[0].project[0].technology[2] == 'Gradle'
+# Validate the size of Array
+    And match response.[0].experience == '#[4]'
+    And match response.[0].project[0].technology == '#[3]'
+# Using wildcard char assert a collection
+    And match response.[0].experience[*] == ["Google","Apple","Mobile Iron","Meta"]
+    And match response.[0].project[0].technology[*] == ["Kotlin","SQL Lite","Gradle"]
+# Using wildcard char with contains keyword assert a single value
+```
+ * Avoid using index value and user [*] wild card instead
+ 
+ * Validate the XML response (Using xpath - http://xpather.com/)
